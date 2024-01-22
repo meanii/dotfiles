@@ -3,7 +3,7 @@ local plugins = {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        -- defaults 
+        -- defaults
         "vim",
         "lua",
 
@@ -23,12 +23,11 @@ local plugins = {
 
        -- low level
         "c",
-        "zig"
       },
     },
   },
 
-  -- Override plugin definition options 
+  -- Override plugin definition options
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -41,7 +40,9 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "eslint-lsp",
         "lua-language-server",
+        "typescript-language-server",
         "html-lsp",
         "prettier",
         "stylua",
@@ -56,7 +57,32 @@ local plugins = {
     opts = function()
       return require "custom.configs.null-ls"
     end
-  }
+  },
+
+  {
+    "mhartington/formatter.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return require "custom.configs.formatter"
+    end
+  },
+
+  {
+    "mfussenegger/nvim-lint",
+    event = "VeryLazy",
+    config = function()
+      require "custom.configs.lint"
+    end
+  },
+
+  {
+    "stevearc/conform.nvim",
+    --  for users those who want auto-save conform + lazyloading!
+    -- event = "BufWritePre"
+    config = function()
+      require "custom.configs.conform"
+    end,
+  },
 
 }
 return plugins

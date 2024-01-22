@@ -40,3 +40,15 @@ lspconfig.gopls.setup {
     }
   }
 }
+
+-- javascript, typescript lsp config 
+lspconfig.tsserver.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  init_options = {
+    preferences = {
+      disableSuggestions = true
+    }
+  }
+}
+
