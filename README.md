@@ -48,7 +48,7 @@ To restore your configurations from this repository, execute the following comma
 1. **Clone the Repository**
 
    ```bash
-   git https://github.com/meanii/dotfiles.git ~/dotfiles
+   git clone https://github.com/meanii/dotfiles.git ~/dotfiles
    ```
 
 2. **Apply Configurations**
