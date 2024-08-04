@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+
 return {
 	-- color_scheme = 'termnial.sexy',
 	color_scheme = "Catppuccin Mocha",
@@ -8,7 +9,7 @@ return {
 	-- macos_window_background_blur = 40,
 	macos_window_background_blur = 30,
 
-	window_background_image = "/Users/anil/bugs/Docuements/wallpapers/anime/blue-chains.png",
+	window_background_image = "/Users/anil/.config/wezterm/backgrounds/blue-chains.png",
 	window_background_image_hsb = {
 		brightness = 0.01,
 		hue = 1.0,
