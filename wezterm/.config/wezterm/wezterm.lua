@@ -35,6 +35,10 @@ return {
 		{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
 		-- Make Option-Right equivalent to Alt-f; forward-word
 		{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
+		-- Make Option-Home equivalent to Ctrl-A; move to start of line
+		{ key = "Home", mods = "OPT", action = wezterm.action({ SendString = "\x01" }) },
+		-- Make Option-End equivalent to Ctrl-E; move to end of line
+		{ key = "End", mods = "OPT", action = wezterm.action({ SendString = "\x05" }) },
 	},
 	mouse_bindings = {
 		-- Ctrl-click will open the link under the mouse cursor
