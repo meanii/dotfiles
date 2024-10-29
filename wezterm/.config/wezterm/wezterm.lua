@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 
-return {
+local config = {
 	-- color_scheme = 'termnial.sexy',
 	color_scheme = "Catppuccin Mocha",
 	enable_tab_bar = false,
@@ -27,7 +27,7 @@ return {
 			action = wezterm.action.ToggleFullScreen,
 		},
 		{
-			key = "'",
+			key = "L",
 			mods = "CTRL",
 			action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
 		},
@@ -49,3 +49,5 @@ return {
 		},
 	},
 }
+
+return config
