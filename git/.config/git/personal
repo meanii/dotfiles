@@ -1,0 +1,7 @@
+[user]
+  name = anil chauhan
+  email = anilchauhanxda@gmail.com
+  signingkey = ~/.ssh/id_ed25519.pub
+
+[commit]
+    gpgsign = false

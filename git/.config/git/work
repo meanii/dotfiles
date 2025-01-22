@@ -1,0 +1,10 @@
+[user]
+  name = anil chauhan
+  email = anilchauhan@mogiio.com
+  signingkey = ~/.ssh/work.id_ed25519.pub
+
+[commit]
+    gpgsign = false
+
+[url "github-mogiio:mogiiodotcom"]
+  insteadOf = git@github.com:mogiiodotcom

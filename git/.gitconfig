@@ -1,0 +1,25 @@
+# Global Git Configuration
+[user]
+    name = Anil Chauhan
+    email = anilchauhanxda@gmail.com
+
+# Global default settings
+[core]
+    editor = nvim                      # Set Neovim as the default editor
+    excludesfile = ~/.gitignore_global # Global .gitignore file for ignoring patterns
+[init]
+    defaultBranch = main               # Use 'main' as the default branch name for new repositories
+[pull]
+    rebase = false                     # Merge instead of rebasing when pulling
+[merge]
+    ff = only                          # Only fast-forward merges by default
+[color]
+    ui = true                          # Enable colored output in the terminal
+
+# Conditional Configurations Based on Directory
+[includeIf "gitdir:~/bug/**"]
+    path = ~/.config/git/personal
+
+[includeIf "gitdir:~/work/**"]
+    path = ~/.config/git/work
+
