@@ -1,71 +1,54 @@
 local wezterm = require("wezterm")
+local config = wezterm.config_builder()
 
-local config = {
-	-- Appearance
-	color_scheme = "Catppuccin Mocha",
-	font = wezterm.font("JetBrains Mono"),
-	font_size = 16.0,
-	enable_tab_bar = false,
+config.font_size = 16
+config.font = wezterm.font("JetBrainsMonoNL Nerd Font")
+config.automatically_reload_config = true
+config.enable_tab_bar = false
+config.window_decorations = "RESIZE"
+config.adjust_window_size_when_changing_font_size = false
+config.harfbuzz_features = { "calt=0" }
+config.max_fps = 120
+config.animation_fps = 120
+config.front_end = "WebGpu"
+config.prefer_egl = true
+config.enable_kitty_graphics = true
+config.window_close_confirmation = "NeverPrompt"
+config.window_background_opacity = 0.67
+config.macos_window_background_blur = 12
+config.audible_bell = "Disabled"
 
-	-- Background Customization
-	window_background_image = wezterm.config_dir .. "/backgrounds/blue-chains.png",
-	window_background_image_hsb = {
-		brightness = 0.05, -- Slightly brighter for better visibility
-		hue = 1.0,
-		saturation = 0.5,
+config.window_padding = {
+	left = 18,
+	right = 15,
+	top = 20,
+	bottom = 5,
+}
+
+-- Key bindings delete word
+config.keys = {
+  	{
+		key = "LeftArrow",
+		mods = "OPT",
+		action = wezterm.action({ SendString = "\x1bb" }),
 	},
-	window_background_opacity = 0.9,
-	macos_window_background_blur = 30,
-
-	-- Window Properties
-	initial_rows = 35, -- Adjust window height
-	initial_cols = 120, -- Adjust window width
-	window_decorations = "RESIZE",
-	adjust_window_size_when_changing_font_size = false,
-
-	-- Key Bindings
-	keys = {
-		-- Toggle Fullscreen
-		{
-			key = "f",
-			mods = "CTRL",
-			action = wezterm.action.ToggleFullScreen,
-		},
-		-- Clear Scrollback
-		{
-			key = "L",
-			mods = "CTRL",
-			action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
-		},
-		-- Navigation with Option Key
-		{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
-		{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
-		{ key = "Home", mods = "OPT", action = wezterm.action({ SendString = "\x01" }) },
-		{ key = "End", mods = "OPT", action = wezterm.action({ SendString = "\x05" }) },
-	},
-
-	-- Mouse Bindings
-	mouse_bindings = {
-		-- Ctrl-click to open link
-		{
-			event = { Up = { streak = 1, button = "Left" } },
-			mods = "CTRL",
-			action = wezterm.action.OpenLinkAtMouseCursor,
-		},
-	},
-
-	-- Center Window on Launch (macOS/Linux)
-	window_padding = {
-		left = 10,
-		right = 10,
-		top = 10,
-		bottom = 10,
+	{
+		key = "RightArrow",
+		mods = "OPT",
+		action = wezterm.action({ SendString = "\x1bf" }),
 	},
 }
 
--- Center window for platforms supporting it
-if wezterm.target_triple == "x86_64-apple-darwin" or wezterm.target_triple:find("linux") then
-	config.initial_position = { x = "center", y = "center" }
-end
+-- Configs
+-- Add Custom Color Scheme
+config.color_scheme = "rose-pine"
+config.colors = {
+	-- background = "#12151B", -- lighter gray
+	-- background = "#0D0D0D", -- darker gray
+	background = "#000", -- pure black
+	cursor_bg = "#9B96B5",
+	cursor_fg = "#1a1a1e",
+	cursor_border = "#9B96B5",
+}
 
 return config
