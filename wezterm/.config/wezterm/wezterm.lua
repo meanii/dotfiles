@@ -1,5 +1,15 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
+local mux = wezterm.mux
+
+-- enabling macos fullscreen mode
+wezterm.on("gui-startup", function(window)
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	local gui_window = window:gui_window()
+	gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
+end)
+
+config.native_macos_fullscreen_mode = true
 
 config.font_size = 16
 config.font = wezterm.font("JetBrainsMonoNL Nerd Font")
@@ -27,7 +37,7 @@ config.window_padding = {
 
 -- Key bindings delete word
 config.keys = {
-  	{
+	{
 		key = "LeftArrow",
 		mods = "OPT",
 		action = wezterm.action({ SendString = "\x1bb" }),
