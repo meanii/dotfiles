@@ -22,17 +22,16 @@ config.max_fps = 120
 config.animation_fps = 120
 config.front_end = "WebGpu"
 config.prefer_egl = true
-config.enable_kitty_graphics = true
 config.window_close_confirmation = "NeverPrompt"
 config.window_background_opacity = 0.67
 config.macos_window_background_blur = 12
 config.audible_bell = "Disabled"
 
 config.window_padding = {
-	left = 18,
-	right = 15,
-	top = 20,
-	bottom = 5,
+	left = 18, -- left padding, in pixels
+	right = 15, -- right padding, in pixels
+	top = 20,  -- top padding, in pixels
+	bottom = 5, -- bottom padding, in pixels
 }
 
 -- Key bindings delete word
