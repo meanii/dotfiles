@@ -1,0 +1,33 @@
+[[language]]
+name = "python"
+auto-format = true
+formatter = { command = "ruff", args = ["format", "--stdin-filename", "dummy.py", "-"] }
+language-servers = ["ruff-lsp", "pylsp"]
+
+[language-server.ruff-lsp]
+command = "ruff-lsp"
+
+[language-server.pylsp]
+command = "pylsp"
+
+[[language]]
+name = "yaml"
+auto-format = true
+formatter = { command = "yamlfmt", args = ["-"] }
+language-servers = ["yaml-language-server"]
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "go"
+auto-format = true
+formatter = { command = "goimports" }
+language-servers = ["gopls", "golangci-lint-lsp"]
+
+[language-server.golangci-lint-lsp]
+command = "golangci-lint-langserver"
+
+[language-server.golangci-lint-lsp.config]
+command = ["golangci-lint", "run", "--out-format", "json", "--issues-exit-code=1"]
