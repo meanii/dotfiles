@@ -2,17 +2,31 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local mux = wezterm.mux
 
--- enabling macos fullscreen mode
-wezterm.on("gui-startup", function(window)
-	local tab, pane, window = mux.spawn_window(cmd or {})
-	local gui_window = window:gui_window()
-	gui_window:perform_action(wezterm.action.ToggleFullScreen, pane)
+-- New startup event to center the window
+wezterm.on("gui-startup", function(cmd)
+    local tab, pane, window = mux.spawn_window(cmd or {})
+    local gui_window = window:gui_window()
+    
+    -- Get screen dimensions
+    local screen = gui_window:screen()
+    local screen_width = screen.working_right - screen.working_left
+    local screen_height = screen.working_bottom - screen.working_top
+    
+    -- Calculate centered position with margins
+    local margin = 80  -- Adjust this value to change margin size
+    local x = math.max(screen.working_left + margin, 0)
+    local y = math.max(screen.working_top + margin, 0)
+    
+    gui_window:set_position(x, y)
 end)
 
-config.native_macos_fullscreen_mode = true
+-- Set initial size (adjust these values to your preference)
+config.initial_cols = 120
+config.initial_rows = 35
 
+-- Keep your existing configuration below
 config.font_size = 16
-config.font = wezterm.font("JetBrainsMonoNL Nerd Font")
+config.font = wezterm.font("JetBrains Mono")
 config.automatically_reload_config = true
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
@@ -28,36 +42,32 @@ config.macos_window_background_blur = 12
 config.audible_bell = "Disabled"
 
 config.window_padding = {
-	left = 18, -- left padding, in pixels
-	right = 15, -- right padding, in pixels
-	top = 20,  -- top padding, in pixels
-	bottom = 5, -- bottom padding, in pixels
+    left = 18,
+    right = 15,
+    top = 20,
+    bottom = 5,
 }
 
 -- Key bindings delete word
 config.keys = {
-	{
-		key = "LeftArrow",
-		mods = "OPT",
-		action = wezterm.action({ SendString = "\x1bb" }),
-	},
-	{
-		key = "RightArrow",
-		mods = "OPT",
-		action = wezterm.action({ SendString = "\x1bf" }),
-	},
+    {
+        key = "LeftArrow",
+        mods = "OPT",
+        action = wezterm.action({ SendString = "\x1bb" }),
+    },
+    {
+        key = "RightArrow",
+        mods = "OPT",
+        action = wezterm.action({ SendString = "\x1bf" }),
+    },
 }
 
--- Configs
--- Add Custom Color Scheme
 config.color_scheme = "rose-pine"
 config.colors = {
-	-- background = "#12151B", -- lighter gray
-	-- background = "#0D0D0D", -- darker gray
-	background = "#000", -- pure black
-	cursor_bg = "#9B96B5",
-	cursor_fg = "#1a1a1e",
-	cursor_border = "#9B96B5",
+    background = "#000",
+    cursor_bg = "#9B96B5",
+    cursor_fg = "#1a1a1e",
+    cursor_border = "#9B96B5",
 }
 
 return config

@@ -1,13 +1,30 @@
-theme = "dracula"
+theme = "adwaita-dark"
 
 [editor]
 line-number = "relative"
 mouse = true
+cursorline = false
+lsp.display-inlay-hints = false
 
 [editor.cursor-shape]
 insert = "bar"
-normal = "block"
+normal = "bar"
 select = "underline"
 
 [editor.file-picker]
 hidden = false
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+nbsp = "none"
+nnbsp = "none"
+newline = "none"
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[editor.inline-diagnostics]
+cursor-line = "hint"

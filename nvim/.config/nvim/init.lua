@@ -17,7 +17,10 @@ vim.packadd({
 	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
 })
+
+require "mason".setup()
 
 -- Use built-in omnifunc for LSP and enable <C-x><C-o>
 vim.opt.completeopt = { "menuone", "noselect", "popup" }
@@ -32,7 +35,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 
 -- Enable Lua language server via lspconfig
-vim.lsp.enable({ "lua_ls" })
+vim.lsp.enable({ "lua_ls", "svelte", "tinymist", "emmetls" })
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+			}
+		}
+	}
+})
 
 -- mini.pick (fuzzy finder)
 require("mini.pick").setup()
