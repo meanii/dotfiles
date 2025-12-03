@@ -25,8 +25,11 @@ config.initial_cols = 120
 config.initial_rows = 35
 
 -- Keep your existing configuration below
-config.font_size = 16
-config.font = wezterm.font("JetBrains Mono")
+config.font_size = 18
+-- config.font = wezterm.font("JetBrainsMono NF")
+-- config.font = wezterm.font("JetBrains Mono")
+wezterm.font("FiraCode Nerd Font", {weight="Regular", stretch="Normal", style="Normal"})
+
 config.automatically_reload_config = true
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
@@ -37,7 +40,7 @@ config.animation_fps = 120
 config.front_end = "WebGpu"
 config.prefer_egl = true
 config.window_close_confirmation = "NeverPrompt"
-config.window_background_opacity = 0.67
+config.window_background_opacity = 1
 config.macos_window_background_blur = 12
 config.audible_bell = "Disabled"
 
