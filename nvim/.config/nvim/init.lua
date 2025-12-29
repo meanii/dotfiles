@@ -56,7 +56,6 @@ require("oil").setup()
 vim.cmd("colorscheme vague")
 vim.cmd("hi statusline guibg=NONE")
 
-
 local map = vim.keymap.set
 -- Save, reload, quit
 map("n", "<leader>o", ":update<CR>:source<CR>", { desc = "Save & reload config" })

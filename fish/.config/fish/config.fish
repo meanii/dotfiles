@@ -11,10 +11,20 @@ if status is-interactive
 
 end
 
-# # tmux auto start
-if status is-interactive
-    and not set -q TMUX
-    exec tmux new -s default
+# # tmux auto start ( NOT SAFE )
+# if status is-interactive
+#     and not set -q TMUX
+#     exec tmux new -s default
+# end
+
+# tmux start manully
+function t
+    tmux new-session -A -s default
+end
+
+# tmux start with dyanmic session
+function tt
+	tmux new-session -A -s "$(basename $(pwd))"
 end
 
 # enviorment for volta
