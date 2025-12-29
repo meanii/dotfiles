@@ -31,7 +31,7 @@ end
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
 
-source $HOME/.local/bin/env.fish
+source $HOME/.local/bin/env.fish 2>/dev/null
 
 # alias of !!
 function last_history_item
