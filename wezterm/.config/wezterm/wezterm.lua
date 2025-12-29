@@ -2,24 +2,6 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local mux = wezterm.mux
 
--- New startup event to center the window
-wezterm.on("gui-startup", function(cmd)
-    local tab, pane, window = mux.spawn_window(cmd or {})
-    local gui_window = window:gui_window()
-    
-    -- Get screen dimensions
-    local screen = gui_window:screen()
-    local screen_width = screen.working_right - screen.working_left
-    local screen_height = screen.working_bottom - screen.working_top
-    
-    -- Calculate centered position with margins
-    local margin = 80  -- Adjust this value to change margin size
-    local x = math.max(screen.working_left + margin, 0)
-    local y = math.max(screen.working_top + margin, 0)
-    
-    gui_window:set_position(x, y)
-end)
-
 -- Set initial size (adjust these values to your preference)
 config.initial_cols = 120
 config.initial_rows = 35
