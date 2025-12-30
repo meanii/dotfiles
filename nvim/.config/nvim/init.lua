@@ -18,6 +18,7 @@ vim.packadd({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/vimwiki/vimwiki" },
 })
 
 require "mason".setup()
@@ -56,7 +57,19 @@ require("oil").setup()
 vim.cmd("colorscheme vague")
 vim.cmd("hi statusline guibg=NONE")
 
+-- vimwiki config
+vim.g.vimwiki_list = {
+  {
+    syntax = 'markdown',
+    ext = '.md',
+  },
+}
+
+-- Do not treat all .md files as wiki files globally
+vim.g.vimwiki_global_ext = 0
+
 local map = vim.keymap.set
+
 -- Save, reload, quit
 map("n", "<leader>o", ":update<CR>:source<CR>", { desc = "Save & reload config" })
 map("n", "<leader>w", ":write<CR>", { desc = "Save file" })

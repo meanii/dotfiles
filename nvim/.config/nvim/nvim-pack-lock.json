@@ -19,6 +19,10 @@
     "vague.nvim": {
       "rev": "fcc283576764474ccfbbcca240797d5d7f4d8a78",
       "src": "https://github.com/vague2k/vague.nvim"
+    },
+    "vimwiki": {
+      "rev": "72792615e739d0eb54a9c8f7e0a46a6e2407c9e8",
+      "src": "https://github.com/vimwiki/vimwiki"
     }
   }
 }
