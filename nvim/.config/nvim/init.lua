@@ -8,8 +8,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
-vim.opt.completeopt = { "menu", "menuone", "noselect" } -- required for nvim-cmp UI
-vim.opt.winborder = "rounded"                           -- rounded borders for LSP floats
+vim.opt.completeopt = { "menu", "menuone", "noselect" } -- required for cmp
+vim.opt.winborder = "rounded"                           -- affects LSP / diagnostic floats
 vim.g.mapleader = " "
 
 -- plugins (native pack)
@@ -25,11 +25,15 @@ vim.packadd({
 
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
-	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" }, -- mason ↔ lsp bridge
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
-	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" }, -- exposes LSP completion to cmp
+	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
 	{ src = "https://github.com/hrsh7th/cmp-buffer" },
+
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvimtools/none-ls.nvim" },
+
 
 	{ src = "https://github.com/vimwiki/vimwiki" },
 })
@@ -38,41 +42,64 @@ vim.packadd({
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "gopls", "golangci_lint_ls", "lua_ls" }, -- install servers automatically
+	ensure_installed = {
+		"gopls",
+		"golangci_lint_ls",
+		"lua_ls",
+		"clangd",
+		"elixirls",
+	},
 })
 
 -- lsp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
--- ↑ without this, LSP completion won't show in nvim-cmp
+-- without this, LSP completion won't appear in cmp
 
 vim.lsp.config("*", {
-	capabilities = capabilities, -- apply to all servers
+	capabilities = capabilities,
 })
 
 vim.lsp.enable({
 	"gopls",
 	"golangci_lint_ls",
 	"lua_ls",
+	"clangd",
+	"elixirls",
 })
 
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true), -- let lua_ls see Neovim runtime
+				library = vim.api.nvim_get_runtime_file("", true), -- expose Neovim runtime
 			},
 			diagnostics = {
-				globals = { "vim" }, -- avoid false positives in config
+				globals = { "vim" }, -- avoid false positives
 			},
 		},
+	},
+})
+
+-- null-ls (formatters / linters)
+local null_ls = require("null-ls")
+
+
+null_ls.setup({
+	sources = {
+		-- formatters
+		null_ls.builtins.formatting.prettier, -- js / ts / html / tailwind
+		null_ls.builtins.formatting.stylua, -- lua
+		null_ls.builtins.formatting.clang_format, -- c / cpp
+		null_ls.builtins.formatting.mix,    -- elixir
+
 	},
 })
 
 -- format & diagnostics on save
 vim.api.nvim_create_autocmd("BufWritePre", {
 	callback = function()
-		vim.lsp.buf.format({ async = false }) -- block to ensure file is formatted before save
+		vim.lsp.buf.format({ async = false }) -- blocks to avoid race conditions
 	end,
 })
 
@@ -87,13 +114,13 @@ local cmp = require("cmp")
 
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
-		["<C-Space>"] = cmp.mapping.complete(), -- manual trigger if auto-popup is off
+		["<C-Space>"] = cmp.mapping.complete(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 		["<Esc>"] = cmp.mapping.abort(),
 	}),
 	sources = {
-		{ name = "nvim_lsp" }, -- primary source
-		{ name = "buffer" }, -- fallback words from buffer
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
 	},
 })
 
@@ -106,7 +133,7 @@ require("mini.comment").setup()
 require("oil").setup()
 
 vim.cmd("colorscheme vague")
-vim.cmd("hi statusline guibg=NONE") -- let terminal background show through
+vim.cmd("hi statusline guibg=NONE") -- transparent statusline
 
 -- vimwiki
 vim.g.vimwiki_list = {
@@ -131,6 +158,6 @@ map("n", "<leader>f", ":Pick files<CR>")
 map("n", "<leader>h", ":Pick help<CR>")
 map("n", "<leader>e", ":Oil<CR>")
 
-map("n", "K", vim.lsp.buf.hover) -- show docs / error details
+map("n", "K", vim.lsp.buf.hover)
 map("n", "gd", vim.lsp.buf.definition)
 map("n", "<leader>lf", vim.lsp.buf.format)
