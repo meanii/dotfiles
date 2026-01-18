@@ -7,7 +7,7 @@ config.initial_cols = 120
 config.initial_rows = 35
 
 -- Keep your existing configuration below
-config.font_size = 18
+config.font_size = 12
 -- config.font = wezterm.font("JetBrainsMono NF")
 -- config.font = wezterm.font("JetBrains Mono")
 wezterm.font("FiraCode Nerd Font", {weight="Regular", stretch="Normal", style="Normal"})
