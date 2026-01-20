@@ -151,6 +151,10 @@ map("n", "<leader>o", ":update<CR>:source<CR>")
 map({ "n", "v" }, "<leader>y", '"+y')
 map({ "n", "v" }, "<leader>d", '"+d')
 
+--- vimwiki
+map("n", "<leader>tt", "<cmd>VimwikiToggleListItem<CR>")
+map("v", "<leader>tt", "<cmd>VimwikiToggleListItem<CR>")
+
 map("v", "<Tab>", ">gv")
 map("v", "<S-Tab>", "<gv")
 
