@@ -10,6 +10,7 @@ vim.opt.swapfile = false
 vim.opt.clipboard = "unnamedplus"
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- required for cmp
 vim.opt.winborder = "rounded"                           -- affects LSP / diagnostic floats
+vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 
 -- plugins (native pack)
@@ -34,13 +35,13 @@ vim.packadd({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvimtools/none-ls.nvim" },
 
-
 	{ src = "https://github.com/vimwiki/vimwiki" },
 })
 
 -- mason
 require("mason").setup()
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"gopls",
@@ -48,6 +49,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"clangd",
 		"elixirls",
+		"terraformls"
 	},
 })
 
@@ -66,8 +68,10 @@ vim.lsp.enable({
 	"lua_ls",
 	"clangd",
 	"elixirls",
+	"terraformls"
 })
 
+-- https://neovim.io/doc/user/lsp.html
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
@@ -92,7 +96,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.stylua, -- lua
 		null_ls.builtins.formatting.clang_format, -- c / cpp
 		null_ls.builtins.formatting.mix,    -- elixir
-
+		null_ls.builtins.formatting.terraform_fmt -- terraform fmt
 	},
 })
 
