@@ -2,6 +2,8 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 local mux = wezterm.mux
 
+--
+
 -- Set initial size (adjust these values to your preference)
 config.initial_cols = 120
 config.initial_rows = 35
@@ -14,7 +16,7 @@ wezterm.font("FiraCode Nerd Font", {weight="Regular", stretch="Normal", style="N
 
 config.automatically_reload_config = true
 config.enable_tab_bar = false
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.adjust_window_size_when_changing_font_size = false
 config.harfbuzz_features = { "calt=0" }
 config.max_fps = 120

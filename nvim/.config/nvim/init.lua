@@ -49,7 +49,10 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"clangd",
 		"elixirls",
-		"terraformls"
+		"terraformls",
+		"docker_compose_language_service",
+		"docker_language_server",
+		"dockerls"
 	},
 })
 
@@ -68,7 +71,10 @@ vim.lsp.enable({
 	"lua_ls",
 	"clangd",
 	"elixirls",
-	"terraformls"
+	"terraformls",
+	"docker_compose_language_service",
+	"docker_language_server",
+	"dockerls"
 })
 
 -- https://neovim.io/doc/user/lsp.html

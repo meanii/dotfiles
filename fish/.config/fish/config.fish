@@ -37,11 +37,13 @@ abbr -a !!! --position anywhere --function last_history_without_exec
 # settinh up paths got bins
 ## golang bin
 set -x PATH $PATH /usr/local/go/bin
+
 ## volta
 set -x VOLTA_HOME $PATH $HOME/.volta 
 set -x PATH $PATH $VOLTA_HOME/bin
 
 # aliases
 alias v="nvim"
+
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH

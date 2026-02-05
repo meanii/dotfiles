@@ -55,6 +55,9 @@ To restore your configurations from this repository, execute the following comma
 
    ```bash
    stow -d ~/dotfiles -t ~ nvim tmux wezterm
+
+   # for root targeted configs eg. nixos
+   sudo stow -d ~/dotfiles -t / nixos
    ```
 
    This command will restore the configurations for Neovim, Tmux, and Wezterm. You can adjust the command to include any other tools you wish to configure.
