@@ -160,6 +160,7 @@ in
 	lazygit
 	fzf
 	vicinae
+	xclip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
