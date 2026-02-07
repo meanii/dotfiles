@@ -46,6 +46,7 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		"gopls",
 		"golangci_lint_ls",
+		"golangci-lint",
 		"lua_ls",
 		"clangd",
 		"elixirls",
@@ -68,6 +69,7 @@ vim.lsp.config("*", {
 vim.lsp.enable({
 	"gopls",
 	"golangci_lint_ls",
+	"golangci-lint",
 	"lua_ls",
 	"clangd",
 	"elixirls",

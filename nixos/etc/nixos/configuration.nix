@@ -152,6 +152,7 @@ in
 	tree
 	go
 	gopls
+	golangci-lint
 	gcc
 	python3
 	terraform
